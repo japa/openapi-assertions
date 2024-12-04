@@ -11,7 +11,7 @@ import { test } from '@japa/runner'
 import { assert as chaiAssert } from 'chai'
 import { TestContext, Test, Emitter, Refiner } from '@japa/runner/core'
 
-import { openApi } from '../index.js'
+import { openapi } from '../index.js'
 import { OpenApiAssertions } from '../src/openapi_assertions.js'
 import { wrapAssertions } from '../tests_helpers/index.js'
 
@@ -19,7 +19,7 @@ test.group('Plugin', () => {
   test('add openapi property to test context', async () => {
     const emitter = new Emitter()
 
-    openApi({
+    openapi({
       schemas: [new URL('./fixtures/api-spec.json', import.meta.url)],
     })({
       cliArgs: {},

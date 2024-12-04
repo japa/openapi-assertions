@@ -22,7 +22,7 @@ declare module '@japa/runner/core' {
 /**
  * Plugin for "@japa/runner"
  */
-export function openApi(options: PluginConfig): PluginFn {
+export function openapi(options: PluginConfig): PluginFn {
   OpenApiAssertions.registerSpecs(options.schemas, {
     exportCoverage: options.exportCoverage,
     reportCoverage: options.reportCoverage,
