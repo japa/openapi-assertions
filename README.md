@@ -6,11 +6,43 @@
 
 ## Introduction
 
+This package contains the OpenAPI Assertion tests that used to be included in `@japa/assert`
+
+## Installation
+Install the package from the npm registry as follows:
+
+```sh
+npm i @japa/assert
+
+yarn add @japa/assert
+```
+
 ## Official Documentation
+
+You can use the assertion package with the `@japa/runner` as follows, registering an OpenAPI Schema:
+
+```ts
+import { openapi } from '@japa/openapi-assertions'
+
+configure({
+  plugins: [openapi({
+    schemas: [new URL('../api-spec.json', import.meta.url)]
+  })]
+})
+```
+
+In tests you can validate API responses as follows:
+
+```ts
+test('get users', ({ openapi }) => {
+  const response = await supertest(baseUrl).get('/users')
+  openapi.isValidResponse(response)
+})
+```
 
 ## Contributing
 
-One of the primary goals of japa is to have a vibrant community of users and contributors who believes in the principles of the framework.
+One of the primary goals of Japa is to have a vibrant community of users and contributors who believes in the principles of the framework.
 
 We encourage you to read the [contribution guide](https://github.com/japa/.github/blob/main/docs/CONTRIBUTING.md) before contributing to the framework.
 
@@ -20,7 +52,7 @@ In order to ensure that the japa community is welcoming to all, please review an
 
 ## License
 
-<pkg-name> is open-sourced software licensed under the [MIT license](LICENSE.md).
+@japa/openapi-assertions is open-sourced software licensed under the [MIT license](LICENSE.md).
 
 [gh-workflow-image]: https://img.shields.io/github/actions/workflow/status/japa/openapi-assertions/checks.yml?style=for-the-badge
 [gh-workflow-url]: https://github.com/japa/openapi-assertions/actions/workflows/checks.yml 'Github action'

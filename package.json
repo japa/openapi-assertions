@@ -1,7 +1,7 @@
 {
   "name": "@japa/openapi-assertions",
-  "description": "",
-  "version": "0.0.0",
+  "description": "OpenAPI Assertions plugin for Japa",
+  "version": "v0.0.0",
   "engines": {
     "node": ">=20.6.0"
   },
@@ -48,6 +48,12 @@
     "ts-node-maintained": "^10.9.4",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@poppinss/macroable": "^1.0.2",
+    "@types/chai": "^4.3.14",
+    "api-contract-validator": "^2.2.8",
+    "chai": "^5.1.0"
   },
   "homepage": "https://github.com/japa/openapi-assertions#readme",
   "repository": {
@@ -105,7 +111,8 @@
       "html"
     ],
     "exclude": [
-      "tests/**"
+      "tests/**",
+      "tests_helpers/**"
     ]
   },
   "prettier": "@adonisjs/prettier-config"
