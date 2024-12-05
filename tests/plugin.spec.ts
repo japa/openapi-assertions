@@ -1,5 +1,5 @@
 /*
- * @japa/assert
+ * @japa/openapi-assertions
  *
  * (c) Japa.dev
  *

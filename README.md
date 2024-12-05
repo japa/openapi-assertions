@@ -12,9 +12,9 @@ This package contains the OpenAPI Assertion tests that used to be included in `@
 Install the package from the npm registry as follows:
 
 ```sh
-npm i @japa/assert
+npm i @japa/openapi-assertions
 
-yarn add @japa/assert
+yarn add @japa/openapi-assertions
 ```
 
 ## Official Documentation
@@ -42,7 +42,7 @@ test('get users', ({ openapi }) => {
 
 ## Contributing
 
-One of the primary goals of Japa is to have a vibrant community of users and contributors who believes in the principles of the framework.
+One of the primary goals of japa is to have a vibrant community of users and contributors who believes in the principles of the framework.
 
 We encourage you to read the [contribution guide](https://github.com/japa/.github/blob/main/docs/CONTRIBUTING.md) before contributing to the framework.
 
