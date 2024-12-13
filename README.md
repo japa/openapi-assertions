@@ -9,6 +9,7 @@
 This package contains the OpenAPI Assertion tests that used to be included in `@japa/assert`
 
 ## Installation
+
 Install the package from the npm registry as follows:
 
 ```sh
@@ -25,18 +26,20 @@ You can use the assertion package with the `@japa/runner` as follows, registerin
 import { openapi } from '@japa/openapi-assertions'
 
 configure({
-  plugins: [openapi({
-    schemas: [new URL('../api-spec.json', import.meta.url)]
-  })]
+  plugins: [
+    openapi({
+      schemas: [new URL('../api-spec.json', import.meta.url)],
+    }),
+  ],
 })
 ```
 
 In tests you can validate API responses as follows:
 
 ```ts
-test('get users', ({ openapi }) => {
+test('get users', ({ assert }) => {
   const response = await supertest(baseUrl).get('/users')
-  openapi.isValidResponse(response)
+  assert.isValidResponse(response)
 })
 ```
 

@@ -12,11 +12,10 @@ import { assert as chaiAssert } from 'chai'
 import { TestContext, Test, Emitter, Refiner } from '@japa/runner/core'
 
 import { openapi } from '../index.js'
-import { OpenApiAssertions } from '../src/openapi_assertions.js'
 import { wrapAssertions } from '../tests_helpers/index.js'
 
 test.group('Plugin', () => {
-  test('add openapi property to test context', async () => {
+  test('add isValidApiResponse method to assert', async () => {
     const emitter = new Emitter()
 
     openapi({
@@ -32,13 +31,8 @@ test.group('Plugin', () => {
     const getContext = (t: Test<any>) => new TestContext(t)
 
     const testInstance = new Test('test 1', getContext, emitter, refiner)
-    testInstance.run(async (ctx) => {
-      ctx.assert.plan(1)
-    })
-
     wrapAssertions(() => {
-      chaiAssert.isDefined(getContext(testInstance)['openapi'])
-      chaiAssert.instanceOf(getContext(testInstance)['openapi'], OpenApiAssertions)
+      chaiAssert.isDefined(getContext(testInstance).assert.isValidApiResponse)
     })
   })
 })

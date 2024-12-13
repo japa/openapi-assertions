@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 
+import { expect, use } from 'chai'
 import { fileURLToPath } from 'node:url'
 import Macroable from '@poppinss/macroable'
 import { chaiPlugin } from 'api-contract-validator'
-import { expect, use } from 'chai'
 import { OpenApiAssertionsContract } from './types.js'
 
 /**

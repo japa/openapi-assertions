@@ -8,14 +8,14 @@
  */
 
 import type { PluginFn } from '@japa/runner/types'
-import { TestContext } from '@japa/runner/core'
 
 import { OpenApiAssertions } from './src/openapi_assertions.js'
 import type { PluginConfig } from './src/types.js'
+import { Assert } from '@japa/assert'
 
-declare module '@japa/runner/core' {
-  interface TestContext {
-    openapi: OpenApiAssertions
+declare module '@japa/assert' {
+  export interface Assert {
+    isValidResponse: (response: any) => void
   }
 }
 
@@ -27,9 +27,8 @@ export function openapi(options: PluginConfig): PluginFn {
     exportCoverage: options.exportCoverage,
     reportCoverage: options.reportCoverage,
   })
-
   return function () {
-    TestContext.getter('openapi', () => new OpenApiAssertions(), true)
+    Assert.macro('isValidResponse', (response) => new OpenApiAssertions().isValidResponse(response))
   }
 }
 
