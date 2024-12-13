@@ -15,7 +15,7 @@ import { Assert } from '@japa/assert'
 
 declare module '@japa/assert' {
   export interface Assert {
-    isValidResponse: (response: any) => void
+    isValidApiResponse: (response: any) => Chai.Assertion
   }
 }
 
@@ -28,7 +28,9 @@ export function openapi(options: PluginConfig): PluginFn {
     reportCoverage: options.reportCoverage,
   })
   return function () {
-    Assert.macro('isValidResponse', (response) => new OpenApiAssertions().isValidResponse(response))
+    Assert.macro('isValidApiResponse', (response) =>
+      new OpenApiAssertions().isValidResponse(response)
+    )
   }
 }
 
