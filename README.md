@@ -39,7 +39,7 @@ In tests you can validate API responses as follows:
 ```ts
 test('get users', ({ assert }) => {
   const response = await supertest(baseUrl).get('/users')
-  assert.isValidResponse(response)
+  assert.isValidApiResponse(response)
 })
 ```
 
