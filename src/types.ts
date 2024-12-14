@@ -8,7 +8,7 @@
  */
 
 export type OpenApiAssertionsContract = {
-  isValidResponse(response: any): void
+  isValidResponse: (response: any) => Chai.Assertion
 }
 
 export type PluginConfig = {

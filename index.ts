@@ -10,12 +10,12 @@
 import type { PluginFn } from '@japa/runner/types'
 
 import { OpenApiAssertions } from './src/openapi_assertions.js'
-import type { PluginConfig } from './src/types.js'
+import type { OpenApiAssertionsContract, PluginConfig } from './src/types.js'
 import { Assert } from '@japa/assert'
 
 declare module '@japa/assert' {
   export interface Assert {
-    isValidApiResponse: (response: any) => Chai.Assertion
+    isValidApiResponse: OpenApiAssertionsContract['isValidResponse']
   }
 }
 

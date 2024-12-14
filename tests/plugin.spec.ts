@@ -33,6 +33,8 @@ test.group('Plugin', () => {
     const testInstance = new Test('test 1', getContext, emitter, refiner)
     wrapAssertions(() => {
       chaiAssert.isDefined(getContext(testInstance).assert.isValidApiResponse)
+      chaiAssert.isFunction(getContext(testInstance).assert.isValidApiResponse)
+      chaiAssert.strictEqual(getContext(testInstance).assert.isValidApiResponse.length, 1)
     })
   })
 })
