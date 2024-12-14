@@ -9,7 +9,8 @@
   "files": [
     "build",
     "!build/bin",
-    "!build/tests"
+    "!build/tests",
+    "!build/tests_helpers"
   ],
   "main": "build/index.js",
   "exports": {
