@@ -34,27 +34,27 @@
     "@adonisjs/eslint-config": "^2.0.0-beta.6",
     "@adonisjs/prettier-config": "^1.4.0",
     "@adonisjs/tsconfig": "^1.4.0",
-    "@japa/assert": "^3.0.0",
-    "@japa/expect": "^3.0.0-1",
-    "@japa/expect-type": "^2.0.2",
-    "@japa/file-system": "^2.3.0",
-    "@japa/runner": "^3.0.0-9",
-    "@release-it/conventional-changelog": "^8.0.1",
-    "@swc/core": "^1.7.23",
-    "@types/node": "^22.5.4",
-    "c8": "^10.1.2",
-    "eslint": "^9.9.1",
-    "prettier": "^3.3.3",
-    "release-it": "^17.6.0",
+    "@japa/assert": "^4.0.0",
+    "@japa/runner": "^3.1.4",
+    "@release-it/conventional-changelog": "^9.0.3",
+    "@swc/core": "^1.10.1",
+    "@types/chai": "^5.0.1",
+    "@types/node": "^22.10.2",
+    "assertion-error": "^2.0.1",
+    "c8": "^10.1.3",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
+    "release-it": "^17.10.0",
     "ts-node-maintained": "^10.9.4",
-    "tsup": "^8.2.4",
-    "typescript": "^5.5.4"
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@poppinss/macroable": "^1.0.2",
-    "@types/chai": "^4.3.14",
     "api-contract-validator": "^2.2.8",
-    "chai": "^5.1.0"
+    "chai": "^5.1.2"
+  },
+  "peerDependencies": {
+    "@japa/assert": "^4.0.0"
   },
   "homepage": "https://github.com/japa/openapi-assertions#readme",
   "repository": {
@@ -64,7 +64,11 @@
   "bugs": {
     "url": "https://github.com/japa/openapi-assertions/issues"
   },
-  "keywords": [],
+  "keywords": [
+    "open-api",
+    "assert",
+    "japa"
+  ],
   "author": "Harminder Virk <virk@adonisjs.com>",
   "license": "MIT",
   "publishConfig": {

@@ -9,14 +9,13 @@
 
 import { expect, use } from 'chai'
 import { fileURLToPath } from 'node:url'
-import Macroable from '@poppinss/macroable'
 import { chaiPlugin } from 'api-contract-validator'
-import { OpenApiAssertionsContract } from './types.js'
 
 /**
- *
+ * Exposes the API to perform OpenAPI assertions using a pre-defined
+ * schema
  */
-export class OpenApiAssertions extends Macroable implements OpenApiAssertionsContract {
+export class OpenApiAssertions {
   protected static hasInstalledApiValidator = false
 
   /**
@@ -37,12 +36,13 @@ export class OpenApiAssertions extends Macroable implements OpenApiAssertionsCon
   /**
    * Assert the response confirms to open API spec
    */
-  isValidResponse(response: any) {
-    // @ts-ignore
-    if (!this.constructor['hasInstalledApiValidator']) {
-      throw new Error('Cannot validate responses without defining api schemas')
+  isValidResponse(response: any): void {
+    if (!OpenApiAssertions.hasInstalledApiValidator) {
+      throw new Error(
+        'Cannot validate responses without defining api schemas. Please configure the plugin with schemas'
+      )
     }
 
-    return expect(response).to.matchApiSchema()
+    expect(response).to.matchApiSchema()
   }
 }

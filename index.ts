@@ -7,15 +7,14 @@
  * file that was distributed with this source code.
  */
 
-import type { PluginFn } from '@japa/runner/types'
-
-import { OpenApiAssertions } from './src/openapi_assertions.js'
-import type { OpenApiAssertionsContract, PluginConfig } from './src/types.js'
 import { Assert } from '@japa/assert'
+import type { PluginFn } from '@japa/runner/types'
+import type { PluginConfig } from './src/types.js'
+import { OpenApiAssertions } from './src/openapi_assertions.js'
 
 declare module '@japa/assert' {
   export interface Assert {
-    isValidApiResponse: OpenApiAssertionsContract['isValidResponse']
+    isValidApiResponse: (response: any) => void
   }
 }
 

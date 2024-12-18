@@ -8,14 +8,12 @@
  */
 
 import { test } from '@japa/runner'
-import { assert as chaiAssert } from 'chai'
 import { TestContext, Test, Emitter, Refiner } from '@japa/runner/core'
 
 import { openapi } from '../index.js'
-import { wrapAssertions } from '../tests_helpers/index.js'
 
 test.group('Plugin', () => {
-  test('add isValidApiResponse method to assert', async () => {
+  test('add isValidApiResponse method to assert', async ({ assert }) => {
     const emitter = new Emitter()
 
     openapi({
@@ -31,10 +29,8 @@ test.group('Plugin', () => {
     const getContext = (t: Test<any>) => new TestContext(t)
 
     const testInstance = new Test('test 1', getContext, emitter, refiner)
-    wrapAssertions(() => {
-      chaiAssert.isDefined(getContext(testInstance).assert.isValidApiResponse)
-      chaiAssert.isFunction(getContext(testInstance).assert.isValidApiResponse)
-      chaiAssert.strictEqual(getContext(testInstance).assert.isValidApiResponse.length, 1)
-    })
+    assert.isDefined(getContext(testInstance).assert.isValidApiResponse)
+    assert.isFunction(getContext(testInstance).assert.isValidApiResponse)
+    assert.strictEqual(getContext(testInstance).assert.isValidApiResponse.length, 1)
   })
 })

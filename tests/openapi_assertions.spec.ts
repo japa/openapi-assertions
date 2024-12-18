@@ -8,24 +8,25 @@
  */
 
 import { test } from '@japa/runner'
+import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 import { OpenApiAssertions } from '../src/openapi_assertions.js'
-import { expectError } from '../tests_helpers/index.js'
-import { fileURLToPath } from 'node:url'
 
 test.group('When OpenApi is not configured', () => {
-  test('fails when assertions are called', () => {
+  test('fails when assertions are called', ({ assert }) => {
     const openApi = new OpenApiAssertions()
 
-    expectError(() => {
-      openApi.isValidResponse({
-        path: '/v2/pet/1',
-        method: 'get',
-        status: 200,
-        body: {},
-        headers: {},
-      })
-    }, 'Cannot validate responses without defining api schemas')
+    assert.throws(
+      () =>
+        openApi.isValidResponse({
+          path: '/v2/pet/1',
+          method: 'get',
+          status: 200,
+          body: {},
+          headers: {},
+        }),
+      'Cannot validate responses without defining api schemas. Please configure the plugin with schemas'
+    )
   })
 })
 
@@ -37,46 +38,50 @@ test.group('When OpenApi is configured with string schema path', (group) => {
     OpenApiAssertions.registerSpecs([schemaPath])
   })
 
-  test('pass when response confirms to the api spec', () => {
+  test('pass when response confirms to the api spec', ({ assert }) => {
     const openApi = new OpenApiAssertions()
 
-    openApi.isValidResponse({
-      path: '/v2/pet/1',
-      method: 'get',
-      status: 200,
-      body: {
-        name: 'Pet 1',
-        photoUrls: ['/a', 'b'],
-      },
-      headers: {},
-    })
+    assert.doesNotThrow(() =>
+      openApi.isValidResponse({
+        path: '/v2/pet/1',
+        method: 'get',
+        status: 200,
+        body: {
+          name: 'Pet 1',
+          photoUrls: ['/a', 'b'],
+        },
+        headers: {},
+      })
+    )
   })
 })
 
-test.group('When OpenApi is configured', (group) => {
+test.group('When OpenApi is configured with URL schema path', (group) => {
   group.setup(() => {
     OpenApiAssertions.registerSpecs([new URL('./fixtures/api-spec.json', import.meta.url)])
   })
 
-  test('pass when response confirms to the api spec', () => {
+  test('pass when response confirms to the api spec', ({ assert }) => {
     const openApi = new OpenApiAssertions()
 
-    openApi.isValidResponse({
-      path: '/v2/pet/1',
-      method: 'get',
-      status: 200,
-      body: {
-        name: 'Pet 1',
-        photoUrls: ['/a', 'b'],
-      },
-      headers: {},
-    })
+    assert.doesNotThrow(() =>
+      openApi.isValidResponse({
+        path: '/v2/pet/1',
+        method: 'get',
+        status: 200,
+        body: {
+          name: 'Pet 1',
+          photoUrls: ['/a', 'b'],
+        },
+        headers: {},
+      })
+    )
   })
 
-  test('fail when response does not confirms to the api spec', () => {
+  test('fail when response does not confirms to the api spec', ({ assert }) => {
     const openApi = new OpenApiAssertions()
 
-    expectError(() => {
+    assert.throws(() => {
       openApi.isValidResponse({
         path: '/v2/pet/1',
         method: 'get',
@@ -87,24 +92,26 @@ test.group('When OpenApi is configured', (group) => {
     }, 'expected response to match API schema')
   })
 
-  test('validate error messages response', () => {
+  test('validate error messages response', ({ assert }) => {
     const openApi = new OpenApiAssertions()
 
-    openApi.isValidResponse({
-      path: '/v2/pet/1',
-      method: 'get',
-      status: 400,
-      body: {
-        message: 'Invalid id',
-      },
-      headers: {},
-    })
+    assert.doesNotThrow(() =>
+      openApi.isValidResponse({
+        path: '/v2/pet/1',
+        method: 'get',
+        status: 400,
+        body: {
+          message: 'Invalid id',
+        },
+        headers: {},
+      })
+    )
   })
 
-  test('fail when response status code is not in the spec', () => {
+  test('fail when response status code is not in the spec', ({ assert }) => {
     const openApi = new OpenApiAssertions()
 
-    expectError(() => {
+    assert.throws(() => {
       openApi.isValidResponse({
         path: '/v2/pet/1',
         method: 'get',
@@ -115,10 +122,10 @@ test.group('When OpenApi is configured', (group) => {
     }, 'schema not found for {"path":"/v2/pet/1","method":"get","status":401}')
   })
 
-  test('fail when endpoint is not in the spec', () => {
+  test('fail when endpoint is not in the spec', ({ assert }) => {
     const openApi = new OpenApiAssertions()
 
-    expectError(() => {
+    assert.throws(() => {
       openApi.isValidResponse({
         path: '/v2/pets/1',
         method: 'get',
@@ -129,10 +136,10 @@ test.group('When OpenApi is configured', (group) => {
     }, 'schema not found for {"path":"/v2/pets/1","method":"get","status":200}')
   })
 
-  test('fail when response headers mis-match', () => {
+  test('fail when response headers mis-match', ({ assert }) => {
     const openApi = new OpenApiAssertions()
 
-    expectError(() => {
+    assert.throws(() => {
       openApi.isValidResponse({
         path: '/v2/user/login',
         method: 'get',

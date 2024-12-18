@@ -13,9 +13,9 @@ This package contains the OpenAPI Assertion tests that used to be included in `@
 Install the package from the npm registry as follows:
 
 ```sh
-npm i @japa/openapi-assertions
+npm i -D @japa/openapi-assertions
 
-yarn add @japa/openapi-assertions
+yarn add -D @japa/openapi-assertions
 ```
 
 ## Official Documentation
@@ -34,7 +34,7 @@ configure({
 })
 ```
 
-In tests you can validate API responses as follows:
+In tests you can validate API responses using the `assert.isValidApiResponse` method.
 
 ```ts
 test('get users', ({ assert }) => {
