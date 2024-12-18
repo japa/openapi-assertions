@@ -1,7 +1,7 @@
 {
   "name": "@japa/openapi-assertions",
   "description": "OpenAPI Assertions plugin for Japa",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "engines": {
     "node": ">=20.6.0"
   },
